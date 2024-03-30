@@ -1,6 +1,7 @@
 import json
 from flask import Flask, Response, jsonify, request, abort
 import requests as req
+import socket
 
 app = Flask(__name__)
 
@@ -8,6 +9,7 @@ app = Flask(__name__)
 @app.route('/converte-moedas', methods=['POST'])
 def converte_moedas_route() -> tuple[Response, int]:
     try:
+        hostname = socket.gethostname()
         body = json.loads(request.data)
         valor = body['valor']
         try:
@@ -20,7 +22,7 @@ def converte_moedas_route() -> tuple[Response, int]:
                 "real": valor,
                 "dolar": calcula_valor_em_real(valor, cotacao_euro_e_dolar["cotacao_dolar"]),
                 "euro": calcula_valor_em_real(valor, cotacao_euro_e_dolar["cotacao_euro"]),
-                "maquina": "<hostname_backend>",
+                "maquina": hostname,
             }
         }), 200
     except ValueError as e:

@@ -6,13 +6,13 @@
 pip install -r requirements.txt
 ```
 3. Inicie o programa com o comando:
-```
+```cmd
 python3 index.py
 ```
 -----------------------------------------------------------------
 1. Para chamar a API:
 Com o programa rodando faça uma chamada HTTP com método POST para a rota '/converte-moedas' enviando um objeto como o exemplo abaixo:
-```
+```json
 {
     "valor": 100
 }
